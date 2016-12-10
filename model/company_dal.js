@@ -33,6 +33,44 @@ exports.getById = function(company_id, callback) {
     });
 };
 
+
+exports.insert = function(params, callback) {
+
+    // FIRST INSERT THE COMPANY
+    var query = 'INSERT INTO company (company_name) VALUES (?)';
+
+    var queryData = [params.company_name];
+
+    connection.query(query, params.company_name, function(err, result) {
+
+        // THEN USE THE COMPANY_ID RETURNED AS insertId AND THE SELECTED ADDRESS_IDs INTO COMPANY_ADDRESS
+        var company_id = result.insertId;
+
+        // NOTE THAT THERE IS ONLY ONE QUESTION MARK IN VALUES ?
+        var query = 'INSERT INTO company_address (company_id, address_id) VALUES ?';
+
+        // TO BULK INSERT AN ARRAY OF VALUES WE CREATE A MULTIDIMENSIONAL ARRAY OF THE VALUES
+        var companyAddressData = [];
+        // if only one value is submitted, JavaScript will treat the value as an array, so we skip it if its not an array
+        // for example if the value of params.address_id was "10", it would loop over the "1" and then the "0", instead of
+        // treating it as one value.
+        if(params.address_id instanceof Array) {
+            for(var i=0; i < params.address_id.length; i++) {
+                companyAddressData.push([company_id, params.address_id[i]]);
+            }
+        }
+        else {
+            companyAddressData.push([company_id, params.address_id]);
+        }
+
+        // NOTE THE EXTRA [] AROUND companyAddressData
+        connection.query(query, [companyAddressData], function(err, result){
+            callback(err, result);
+        });
+    });
+
+};
+/*
 exports.insert = function(params, callback) {
 
     // FIRST INSERT THE COMPANY
@@ -61,7 +99,7 @@ exports.insert = function(params, callback) {
     });
 
 };
-
+*/
 exports.delete = function(company_id, callback) {
     var query = 'CALL company_delete(?)';
     var queryData = [company_id];

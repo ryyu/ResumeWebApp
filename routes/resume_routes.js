@@ -84,6 +84,7 @@ router.get('/insert', function(req, res){
         // passing all the query parameters (req.query) to the insert function instead of each individually
         resume_dal.insert(req.query, function(err,result) {
             if (err) {
+                console.log(err)
                 res.send(err);
             }
             else {
