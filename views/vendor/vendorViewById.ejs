@@ -1,0 +1,10 @@
+<%- include("../includes/header.ejs", {title:"Vendor - " + result[0].vendor_name}); %>
+<h1>Vendors</h1>
+<ul>
+    <li>Vendors Name: <%= result[0].vendor_name %></li>
+    <li>Website: <%= result[0].website %></li>
+</ul>
+
+<a href="/vendor/all"><< back</a>
+
+<%- include("../includes/footer.ejs"); %>

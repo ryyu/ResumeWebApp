@@ -16,7 +16,7 @@ exports.getAll = function(callback)
 
 exports.getById = function(resume_id, callback) 
 {
-    var query = 'SELECT * FROM resume WHERE resume_id = ?'
+    var query = 'SELECT * FROM resume_view WHERE resume_id = ?';
     var queryData = [resume_id];
 
     connection.query(query, queryData, function(err, result) 
@@ -58,7 +58,7 @@ exports.insert = function(params, callback) {
 
         // NOTE THE EXTRA [] AROUND companyAddressData
         connection.query(query, [resumeSkillData], function (err, result) {
-
+           
             //second nest
             connection.query(query, queryData, function (err, result) {
 
@@ -86,11 +86,9 @@ exports.insert = function(params, callback) {
                 connection.query(query, [resumeSchoolData], function (err, result) {
                     callback(err, result);
                 });
-
             });
         });
     });
-
 };
 
 

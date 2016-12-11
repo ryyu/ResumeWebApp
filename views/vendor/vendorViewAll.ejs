@@ -1,0 +1,23 @@
+<%- include("../includes/header.ejs", {title:"Vendors - View All"}); %>
+
+<h1>Vendors</h1>
+<a href="/vendor/add">Add New vendor</a> <br />
+
+<br />
+
+<table border="1">
+    <tr><th>Vendor Name</th><th>Actions</th></tr>
+    <% for(var i=0; result.length > i; i++ ) { %>
+    <tr>
+        <td><a href="/vendor/?vendor_id=<%= result[i].vendor_id %>"><%= result[i].vendor_name %></a></td>
+        <td>
+            <button onclick="event.preventDefault();window.location.href='/vendor/edit/?vendor_id=<%= result[i].vendor_id %>'">Edit</button>
+            <form action="/vendor/delete/" style="display:inline">
+                <input type="hidden" name="vendor_id" id="vendor_id" value="<%= result[i].vendor_id %>" />
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    <% } %>
+</table>
+<%- include("../includes/footer.ejs"); %>
