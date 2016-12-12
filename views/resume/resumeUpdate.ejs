@@ -2,30 +2,73 @@
 
 <h1>Update <%= resume.resume_name%></h1>
 <form action="/resume/update" method="get">
-    <input type="hidden" id="resume_id" name="resume_id" value="<%= resume.resume_id %>">
-    Resume Name: <input id="resume_name" name="resume_name" type="text" value="<%= resume.resume_name%>"/>
+    Resume Name: <input id="resume_name" name="resume_name" type="text" />
     <br />
     <br />
-    Address <br />
-    <select id="address_id" name="address_id" multiple="multiple">
-        <% for(var i=0; address.length > i; i++ ) {
-            var selected = "";
 
-            if(address[i].company_id != null) {
-                selected = "selected";
-            }
-        %>
-        <option value="<%= address[i].address_id %>" <%= selected %> ><%= address[i].street + ', ' + address[i].zipcode %></option>
+    Account
+    <br />
+    <select id="account_id" name="account_id">
+        <% for(var i=0; account.length > i; i++ ) { %>
+        <option value="<%= account[i].account_id %>"><%= account[i].email %></option>
         <% } %>
     </select>
 
-    <!-- Initialize the multiselect plugin: -->
+    <br />
+    <br />
+
+    Skills
+    <br />
+    <select id="skill_id" name="skill_id" multiple="multiple">
+        <% for(var i=0; skill.length > i; i++ ) { %>
+        <option value="<%= skill[i].skill_id %>"><%= skill[i].skill_name %></option>
+        <% } %>
+    </select>
+
+    <!-- Initialize the multiselect plugin: skill -->
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#address_id').multiselect();
+            $('#skill_id').multiselect();
         });
     </script>
 
+    <br />
+    <br />
+
+    Company
+    <br />
+    <select id="company_id" name="company_id" multiple="multiple">
+        <% for(var i=0; company.length > i; i++ ) { %>
+        <option value="<%= company[i].company_id %>"><%= company[i].company_name %></option>
+        <% } %>
+    </select>
+
+    <!-- Initialize the multiselect plugin: company-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#company_id').multiselect();
+        });
+    </script>
+
+    <br />
+    <br />
+
+    School
+    <br />
+    <select id="school_id" name="school_id" multiple="multiple">
+        <% for(var i=0; school.length > i; i++ ) { %>
+        <option value="<%= school[i].school_id %>"><%= school[i].school_name %></option>
+        <% } %>
+    </select>
+
+    <!-- Initialize the multiselect plugin: school-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#school_id').multiselect();
+        });
+    </script>
+
+    <br />
     <br />
 
     <input type="submit" />

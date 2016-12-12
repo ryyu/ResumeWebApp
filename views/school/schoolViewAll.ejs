@@ -1,9 +1,6 @@
-<html>
-    <head>
-        <title>Schools</title>
-    </head>
-    <body>
-        <h1>Schools</h1>
+<%- include("../includes/header.ejs", {title:"Schools - View All"}); %>
+
+<h1>Schools</h1>
         <a href="/school/add">Add New School</a> <br />
 
         <br />
@@ -25,6 +22,4 @@
             </tr>
             <% } %>
         </table>
-    </body>
-
-</html>
+<%- include("../includes/footer.ejs"); %>

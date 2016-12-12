@@ -100,4 +100,27 @@ router.get('/delete', function(req, res){
     }
 });
 
+router.get('/update', function(req, res){
+    account_dal.update(req.query, function(err, result){
+        console.log(result[0]);
+        res.redirect(302, '/account/all');
+    });
+});
+
+router.get('/edit', function(req, res){
+    if(req.query.account_id == null) {
+        res.send('A account id is required');
+    }
+    else {
+        account_dal.edit(req.query.account_id, function(err, result){
+            console.log(result[0]);
+            res.render('account/accountUpdate', {account: result[0]}); // , address: result[1]});
+            //res.redirect(302, '/account/all');
+        });
+    }
+
+});
+
+
+
 module.exports = router;

@@ -1,8 +1,5 @@
-<html>
-<head>
-    <title>Address</title>
-</head>
-<body>
+<%- include("../includes/header.ejs", {title:"Schools - View All"}); %>
+
 <h1>Address</h1>
 
 <a href="/address/add">Add New Address</a> <br />
@@ -24,6 +21,4 @@
     </tr>
     <% } %>
 </table>
-</body>
-
-</html>
+<%- include("../includes/footer.ejs"); %>

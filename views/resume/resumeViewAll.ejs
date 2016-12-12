@@ -15,7 +15,7 @@
         <!--- button! Edit + Delete--->
 
         <td>
-            <button onclick="event.preventDefault();window.location.href='/company/edit/?company_id=<%= result[i].company_id %>'">Edit</button>
+            <button onclick="event.preventDefault();window.location.href='/resume/edit2/?resume_id=<%= result[i].resume_id %>'">Edit</button>
 
             <form action="/resume/delete/" style="display:inline">
                 <input type="hidden" name="resume_id" id="resume_id" value="<%= result[i].resume_id %>" />

@@ -134,15 +134,33 @@ router.get('/edit2', function(req, res){
         res.send('A resume id is required');
     }
     else {
-        resume_dal.getById(req.query.company_id, function(err, company){
-            address_dal.getAll(function(err, address) {  /// MIGHT NEED DIFFERENT DAL DEPENDING ON WHAT INFO YOU NEED FOOL
-                res.render('resume/resumeUpdate', {company: company[0], address: address});
+        resume_dal.getById(req.query.resume_id, function(err, resume){
+            skill_dal.getAll(function(err, skill) {  /// MIGHT NEED DIFFERENT DAL DEPENDING ON WHAT INFO YOU NEED FOOL
+                account_dal.getAll(function(err, account) {
+                    company_dal.getAll(function(err, company) {
+                        school_dal.getAll(function(err, school) {
+
+
+                            res.render('resume/resumeUpdate', {
+                                resume: resume[0],
+                                skill: skill,
+                                account: account,
+                                company: company,
+                                school: school
+                            });
+                        });
+                    });
+                });
             });
         });
     }
 
 });
 
-
+router.get('/update', function(req, res) {
+    resume_dal.update(req.query, function(err, result){
+        res.redirect(302, '/resume/all');
+    });
+});
 
 module.exports = router;
